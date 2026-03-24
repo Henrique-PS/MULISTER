@@ -19,23 +19,27 @@ jobs:
         working-directory: ./backend
 
     steps:
-    - name: Checkout do código
+    - name: Code checkout
       uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
 
-    - name: Configurar Node.js
+    - name: Install pnpm
+      uses: pnpm/action-setup@v3
+      with:
+        version: 9
+
+    - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '24'
+        cache: 'pnpm'
 
-    - name: Instalar dependências
-      run: pnpm ci
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
 
-    - name: Rodar Linter
+    - name: Run Linter
       run: pnpm run lint
 
-    - name: Rodar Testes Unitários e gerar coverage
+    - name: Run Unit Tests and generate coverage
       run: pnpm run test:cov
 
     - name: SonarCloud Scan
