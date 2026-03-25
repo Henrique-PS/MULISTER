@@ -1,0 +1,7 @@
+{
+  "name": "@mulister/shared",
+  "version": "1.0.0",
+  "description": "Contratos e tipagens compartilhadas do projeto",
+  "main": "index.ts",
+  "types": "index.ts"
+}
