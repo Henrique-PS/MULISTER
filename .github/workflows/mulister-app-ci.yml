@@ -1,4 +1,4 @@
-name: Backend CI (NestJS)
+name: Mulister App CI (React Native)
 
 on:
   push:
@@ -7,14 +7,14 @@ on:
       - feat/*
       - fix/*
     paths:
-      - 'backend/**'
+      - 'mulister-app/**'
   pull_request:
     branches: -main
       - develop
       - feat/*
       - fix/*
     paths:
-      - 'backend/**'
+      - 'mulister-app/**'
 
 jobs:
   build-and-test:
@@ -22,7 +22,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./backend
+        working-directory: ./mulister-app
 
     steps:
       - name: Code checkout
@@ -54,4 +54,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
-          projectBaseDir: backend
+          projectBaseDir: mulister-app
