@@ -1,7 +1,17 @@
 {
   "name": "@mulister/shared",
   "version": "1.0.0",
-  "description": "Contratos e tipagens compartilhadas do projeto",
+  "description": "Shared contracts and typings for the project",
   "main": "index.ts",
-  "types": "index.ts"
+  "types": "index.ts",
+  "scripts": {
+    "build": "tsp compile main.tsp && openapi-typescript ./tsp-output/@typespec/openapi3/openapi.json -o ./types.ts"
+  },
+  "devDependencies": {
+    "@typespec/compiler": "latest",
+    "@typespec/http": "latest",
+    "@typespec/openapi3": "latest",
+    "@typespec/rest": "latest",
+    "openapi-typescript": "latest"
+  }
 }

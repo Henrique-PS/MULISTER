@@ -1,0 +1,88 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Mulister API",
+    "version": "0.0.0"
+  },
+  "tags": [
+    {
+      "name": "Teste"
+    }
+  ],
+  "paths": {
+    "/teste": {
+      "get": {
+        "operationId": "ITeste_list",
+        "summary": "GET teste",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Teste"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Teste"
+        ]
+      },
+      "post": {
+        "operationId": "ITeste_create",
+        "summary": "POST teste",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Teste"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The server could not understand the request due to invalid syntax."
+          }
+        },
+        "tags": [
+          "Teste"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Teste"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Teste": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Teste"
+          }
+        }
+      }
+    }
+  }
+}
