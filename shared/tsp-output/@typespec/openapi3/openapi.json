@@ -6,62 +6,47 @@
   },
   "tags": [
     {
-      "name": "Teste"
+      "name": "Playlist Transfer"
     }
   ],
   "paths": {
-    "/teste": {
-      "get": {
-        "operationId": "ITeste_list",
-        "summary": "GET teste",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Teste"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Teste"
-        ]
-      },
+    "/transfer": {
       "post": {
-        "operationId": "ITeste_create",
-        "summary": "POST teste",
+        "operationId": "PlaylistTransfer_transfer",
+        "summary": "Transfer playlists from one audio streaming service to another",
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Teste"
-                }
-              }
-            }
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "400": {
             "description": "The server could not understand the request due to invalid syntax."
           }
         },
         "tags": [
-          "Teste"
+          "Playlist Transfer"
         ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Teste"
+                "type": "object",
+                "properties": {
+                  "playlists": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Playlist"
+                    }
+                  },
+                  "target_streaming": {
+                    "$ref": "#/components/schemas/Streaming"
+                  }
+                },
+                "required": [
+                  "playlists",
+                  "target_streaming"
+                ]
               }
             }
           }
@@ -71,15 +56,82 @@
   },
   "components": {
     "schemas": {
-      "Teste": {
+      "Playlist": {
         "type": "object",
         "required": [
-          "id"
+          "id",
+          "name"
         ],
         "properties": {
           "id": {
             "type": "string",
-            "description": "Teste"
+            "description": "The unique identifier for the playlist"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the playlist"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the playlist"
+          },
+          "tracks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Track"
+            },
+            "description": "The list of tracks in the playlist"
+          }
+        }
+      },
+      "Streaming": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the streaming service"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the streaming service"
+          },
+          "url": {
+            "type": "string",
+            "description": "The URL of the streaming service"
+          }
+        }
+      },
+      "Track": {
+        "type": "object",
+        "required": [
+          "id",
+          "isrc",
+          "name",
+          "artists"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the track"
+          },
+          "isrc": {
+            "type": "string",
+            "description": "The International Standard Recording Code for the track"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the track"
+          },
+          "artists": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The list of artists for the track"
           }
         }
       }
