@@ -2,17 +2,11 @@ name: Mulister App CI (React Native)
 
 on:
   push:
-    branches: -main
-      - develop
-      - feat/*
-      - fix/*
+    branches: ["main", "develop"]
     paths:
       - 'mulister-app/**'
   pull_request:
-    branches: -main
-      - develop
-      - feat/*
-      - fix/*
+    branches: ["main", "develop"]
     paths:
       - 'mulister-app/**'
 

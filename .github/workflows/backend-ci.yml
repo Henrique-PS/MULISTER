@@ -2,17 +2,11 @@ name: Backend CI (NestJS)
 
 on:
   push:
-    branches: -main
-      - develop
-      - feat/*
-      - fix/*
+    branches: ["main", "develop"]
     paths:
       - 'backend/**'
   pull_request:
-    branches: -main
-      - develop
-      - feat/*
-      - fix/*
+    branches: ["main", "develop"]
     paths:
       - 'backend/**'
 
