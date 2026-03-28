@@ -3,8 +3,8 @@ import { PlayList } from 'src/domain/playlist.entity';
 
 export class TransferPlaylistsService {
   constructor(
-    private playlists: PlayList[],
-    private streamingAdapter: IStreaming,
+    private readonly playlists: PlayList[],
+    private readonly streamingAdapter: IStreaming,
   ) {}
 
   async execute(): Promise<void> {
