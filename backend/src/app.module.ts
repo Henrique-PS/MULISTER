@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
+import { StreamingModule } from './infrastructure/streaming.module';
 
 @Module({
-  imports: [],
+  imports: [StreamingModule],
   controllers: [],
   providers: [],
 })

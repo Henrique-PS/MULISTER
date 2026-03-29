@@ -46,6 +46,18 @@ model Streaming {
   url?: string;
 }
 
+@route("streaming")
+@tag("Streaming")
+interface StreamingController {
+  @post
+  @summary("Get access token for a streaming service")
+  getAccessToken(@body streaming: Streaming): {
+    access_token: string;
+  } | {
+    @statusCode _: 400;
+  };
+}
+
 @route("transfer")
 @tag("Playlist Transfer")
 interface PlaylistTransfer {

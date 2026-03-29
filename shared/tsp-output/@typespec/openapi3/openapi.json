@@ -6,10 +6,56 @@
   },
   "tags": [
     {
+      "name": "Streaming"
+    },
+    {
       "name": "Playlist Transfer"
     }
   ],
   "paths": {
+    "/streaming": {
+      "post": {
+        "operationId": "StreamingController_getAccessToken",
+        "summary": "Get access token for a streaming service",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "access_token": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "access_token"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The server could not understand the request due to invalid syntax."
+          }
+        },
+        "tags": [
+          "Streaming"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Streaming"
+              }
+            }
+          }
+        }
+      }
+    },
     "/transfer": {
       "post": {
         "operationId": "PlaylistTransfer_transfer",

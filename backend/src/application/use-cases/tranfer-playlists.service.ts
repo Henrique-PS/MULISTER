@@ -1,16 +1,18 @@
-import { IStreaming } from '@mulister/shared';
+import { type IStreaming } from '@mulister/shared';
+import { Injectable } from '@nestjs/common';
 import { PlayList } from 'src/domain/playlist.entity';
 
+@Injectable()
 export class TransferPlaylistsService {
-  constructor(
-    private readonly playlists: PlayList[],
-    private readonly streamingAdapter: IStreaming,
-  ) {}
+  constructor() {}
 
-  async execute(): Promise<void> {
-    for (const playlist of this.playlists) {
+  async execute(
+    playlists: PlayList[],
+    streamingAdapter: IStreaming,
+  ): Promise<void> {
+    for (const playlist of playlists) {
       try {
-        await this.transferSinglePlaylist(playlist);
+        await this.transferSinglePlaylist(playlist, streamingAdapter);
       } catch (error) {
         console.error(
           `Error transferring playlist: ${playlist.getName()}`,
@@ -20,9 +22,12 @@ export class TransferPlaylistsService {
     }
   }
 
-  private async transferSinglePlaylist(playlist: PlayList): Promise<void> {
+  private async transferSinglePlaylist(
+    playlist: PlayList,
+    streamingAdapter: IStreaming,
+  ): Promise<void> {
     try {
-      await this.streamingAdapter.createPlaylist(playlist);
+      await streamingAdapter.createPlaylist(playlist);
     } catch (error) {
       console.error(`Error creating playlist: ${playlist.getName()}`, error);
     }
