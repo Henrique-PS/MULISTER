@@ -2,17 +2,11 @@ name: Mulister App CI (React Native)
 
 on:
   push:
-    branches: -main
-      - develop
-      - feat/*
-      - fix/*
+    branches: ['main', 'develop']
     paths:
       - 'mulister-app/**'
   pull_request:
-    branches: -main
-      - develop
-      - feat/*
-      - fix/*
+    branches: ['main', 'develop']
     paths:
       - 'mulister-app/**'
 
@@ -45,9 +39,6 @@ jobs:
       - name: Run Linter
         run: pnpm run lint
 
-      - name: Run Unit Tests and generate coverage
-        run: pnpm run test:cov
-
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
@@ -55,3 +46,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: mulister-app
+
+      - name: Run Unit Tests and generate coverage
+        run: pnpm run test:cov
