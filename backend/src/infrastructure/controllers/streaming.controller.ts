@@ -14,6 +14,6 @@ export class StreamingController {
 
     const streamingAdapter =
       this.streamingAdapterFactory.createStreamingAdapter(name.toLowerCase());
-    return await streamingAdapter.getAccessToken();
+    return await streamingAdapter.generateAccessToken();
   }
 }

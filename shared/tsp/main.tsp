@@ -50,10 +50,8 @@ model Streaming {
 @tag("Streaming")
 interface StreamingController {
   @post
-  @summary("Get access token for a streaming service")
-  getAccessToken(@body streaming: Streaming): {
-    access_token: string;
-  } | {
+  @summary("Generate access token for a streaming service")
+  generateAccessToken(@body streaming: Streaming): string | {
     @statusCode _: 400;
   };
 }

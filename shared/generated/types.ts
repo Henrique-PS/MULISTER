@@ -13,8 +13,8 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** Get access token for a streaming service */
-        post: operations["StreamingController_getAccessToken"];
+        /** Generate access token for a streaming service */
+        post: operations["StreamingController_generateAccessToken"];
         delete?: never;
         options?: never;
         head?: never;
@@ -79,7 +79,7 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    StreamingController_getAccessToken: {
+    StreamingController_generateAccessToken: {
         parameters: {
             query?: never;
             header?: never;
@@ -98,9 +98,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": {
-                        access_token: string;
-                    };
+                    "text/plain": string;
                 };
             };
             /** @description The server could not understand the request due to invalid syntax. */
