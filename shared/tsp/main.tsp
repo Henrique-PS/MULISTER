@@ -36,14 +36,19 @@ model Playlist {
 }
 
 model Streaming {
-  @doc("The unique identifier for the streaming service")
-  id: string;
-
   @doc("The name of the streaming service")
   name: string;
 
-  @doc("The URL of the streaming service")
-  url?: string;
+  @doc("The code to generate access token for the streaming service")
+  code: string;
+}
+
+model GenerateTokensResponse {
+  @doc("The access token for the streaming service")
+  access_token: string;
+
+  @doc("The refresh token for the streaming service")
+  refresh_token?: string;
 }
 
 @route("streaming")
@@ -51,7 +56,7 @@ model Streaming {
 interface StreamingController {
   @post
   @summary("Generate access token for a streaming service")
-  generateAccessToken(@body streaming: Streaming): string | {
+  generateAccessToken(@body streaming: Streaming): GenerateTokensResponse | {
     @statusCode _: 400;
   };
 }

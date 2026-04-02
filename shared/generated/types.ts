@@ -42,6 +42,12 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        GenerateTokensResponse: {
+            /** @description The access token for the streaming service */
+            access_token: string;
+            /** @description The refresh token for the streaming service */
+            refresh_token?: string;
+        };
         Playlist: {
             /** @description The unique identifier for the playlist */
             id: string;
@@ -53,12 +59,10 @@ export interface components {
             tracks?: components["schemas"]["Track"][];
         };
         Streaming: {
-            /** @description The unique identifier for the streaming service */
-            id: string;
             /** @description The name of the streaming service */
             name: string;
-            /** @description The URL of the streaming service */
-            url?: string;
+            /** @description The code to generate access token for the streaming service */
+            code: string;
         };
         Track: {
             /** @description The unique identifier for the track */
@@ -98,7 +102,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "text/plain": string;
+                    "application/json": components["schemas"]["GenerateTokensResponse"];
                 };
             };
             /** @description The server could not understand the request due to invalid syntax. */

@@ -22,9 +22,9 @@
           "200": {
             "description": "The request has succeeded.",
             "content": {
-              "text/plain": {
+              "application/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/GenerateTokensResponse"
                 }
               }
             }
@@ -94,6 +94,22 @@
   },
   "components": {
     "schemas": {
+      "GenerateTokensResponse": {
+        "type": "object",
+        "required": [
+          "access_token"
+        ],
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "description": "The access token for the streaming service"
+          },
+          "refresh_token": {
+            "type": "string",
+            "description": "The refresh token for the streaming service"
+          }
+        }
+      },
       "Playlist": {
         "type": "object",
         "required": [
@@ -125,21 +141,17 @@
       "Streaming": {
         "type": "object",
         "required": [
-          "id",
-          "name"
+          "name",
+          "code"
         ],
         "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique identifier for the streaming service"
-          },
           "name": {
             "type": "string",
             "description": "The name of the streaming service"
           },
-          "url": {
+          "code": {
             "type": "string",
-            "description": "The URL of the streaming service"
+            "description": "The code to generate access token for the streaming service"
           }
         }
       },

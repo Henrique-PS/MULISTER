@@ -1,4 +1,4 @@
-import { type StreamingDTO } from '@mulister/shared';
+import { GenerateTokensResponseDTO, type StreamingDTO } from '@mulister/shared';
 import { Body, Controller, Post } from '@nestjs/common';
 import { StreamingAdapterFactory } from '../factories/streaming-adapter.factory';
 
@@ -9,11 +9,14 @@ export class StreamingController {
   ) {}
 
   @Post()
-  async getAccessToken(@Body() streamingDTO: StreamingDTO) {
-    const { name } = streamingDTO;
+  async generateAccessToken(
+    @Body() streamingDTO: StreamingDTO,
+  ): Promise<GenerateTokensResponseDTO> {
+    const { name, code } = streamingDTO;
 
     const streamingAdapter =
       this.streamingAdapterFactory.createStreamingAdapter(name.toLowerCase());
-    return await streamingAdapter.generateAccessToken();
+    const tokens = await streamingAdapter.generateTokens(code);
+    return tokens;
   }
 }

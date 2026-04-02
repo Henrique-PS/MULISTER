@@ -1,4 +1,8 @@
-import { AccessTokenResponseDTO, IStreaming } from '@mulister/shared';
+import {
+  AccessTokensResponseDTO,
+  GenerateTokensResponse,
+  IStreaming,
+} from '@mulister/shared';
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { PlayList } from 'src/domain/playlist.entity';
@@ -7,14 +11,18 @@ import { PlayList } from 'src/domain/playlist.entity';
 export class SpotifyAdapter implements IStreaming {
   constructor() {}
 
-  async generateAccessToken(): Promise<string> {
+  async generateTokens(code: string): Promise<GenerateTokensResponse> {
     const clientId = process.env.SPOTIFY_CLIENT_ID;
     const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
 
     try {
-      const response: AccessTokenResponseDTO = await axios.post(
+      const response: AccessTokensResponseDTO = await axios.post(
         'https://accounts.spotify.com/api/token',
-        `grant_type=client_credentials&client_id=${clientId}&client_secret=${clientSecret}`,
+        {
+          grant_type: 'authorization_code',
+          code,
+          redirect_uri: process.env.SPOTIFY_REDIRECT_URI,
+        },
         {
           headers: {
             Authorization: `Basic ${Buffer.from(`${clientId}:${clientSecret}`).toString('base64')}`,
@@ -23,12 +31,11 @@ export class SpotifyAdapter implements IStreaming {
         },
       );
 
-      const access_token: string = response.data.access_token;
+      const { access_token, refresh_token } = response.data;
 
-      return access_token;
+      return { access_token, refresh_token };
     } catch (error) {
-      console.error('Error fetching access token from Spotify:', error);
-      throw new Error('Failed to fetch access token from Spotify');
+      throw new Error('Failed to fetch access token from Spotify: ' + error);
     }
   }
 
@@ -37,6 +44,7 @@ export class SpotifyAdapter implements IStreaming {
   }
 
   async createPlaylist(playlist: PlayList): Promise<void> {
+    console.log(playlist);
     return await Promise.resolve();
   }
 }

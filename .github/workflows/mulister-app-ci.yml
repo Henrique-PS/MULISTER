@@ -37,7 +37,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Run Linter
-        run: pnpm run lint
+        run: pnpm lint
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master

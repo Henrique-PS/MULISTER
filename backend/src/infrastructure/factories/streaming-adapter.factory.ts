@@ -4,8 +4,6 @@ import { SpotifyAdapter } from '../adapters/spotify.adapter';
 
 @Injectable()
 export class StreamingAdapterFactory {
-  constructor() {}
-
   createStreamingAdapter(stremingName: string): IStreaming {
     switch (stremingName) {
       case 'spotify':
