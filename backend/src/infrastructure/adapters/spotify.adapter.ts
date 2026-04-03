@@ -25,7 +25,7 @@ export class SpotifyAdapter implements IStreaming {
         },
         {
           headers: {
-            Authorization: `Basic ${Buffer.from(`${clientId}:${clientSecret}`).toString('base64')}`,
+            Authorization: `Basic ${Buffer.from(clientId + ':' + clientSecret).toString('base64')}`,
             'Content-Type': 'application/x-www-form-urlencoded',
           },
         },
