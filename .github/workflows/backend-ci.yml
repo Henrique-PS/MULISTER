@@ -39,6 +39,9 @@ jobs:
       - name: Run Linter
         run: pnpm run lint
 
+      - name: Run Unit Tests and generate coverage
+        run: pnpm run test:cov
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
@@ -47,5 +50,3 @@ jobs:
         with:
           projectBaseDir: backend
 
-      - name: Run Unit Tests and generate coverage
-        run: pnpm run test:cov
