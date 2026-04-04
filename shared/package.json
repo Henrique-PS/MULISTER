@@ -4,8 +4,11 @@
   "description": "Shared contracts and typings for the project",
   "main": "index.ts",
   "types": "index.ts",
+  "exports": {
+    ".": "./index.ts"
+  },
   "scripts": {
-    "build": "tsp compile main.tsp && openapi-typescript ./tsp-output/@typespec/openapi3/openapi.json -o ./types.ts"
+    "build": "tsp compile ./tsp/main.tsp && openapi-typescript ./tsp-output/@typespec/openapi3/openapi.json -o ./generated/types.ts"
   },
   "devDependencies": {
     "@typespec/compiler": "latest",
