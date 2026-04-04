@@ -74,8 +74,9 @@
     "testEnvironment": "node",
     "coveragePathIgnorePatterns": [
       "node_modules",
-      "src/main.ts",
-      ".*\\.entity\\.ts$" 
+      "src/main\\.ts",
+      ".*\\.entity\\.ts$",
+      ".*\\.module\\.ts$"
     ]
   }
 }
