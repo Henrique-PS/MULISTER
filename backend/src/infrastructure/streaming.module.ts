@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { TransferPlaylistsService } from 'src/application/use-cases/tranfer-playlists.service';
+import { TransferPlaylistsService } from 'src/application/use-cases/transfer-playlists.service';
 import { SpotifyAdapter } from './adapters/spotify.adapter';
 import { StreamingController } from './controllers/streaming.controller';
 import { StreamingAdapterFactory } from './factories/streaming-adapter.factory';

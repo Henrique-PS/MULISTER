@@ -15,6 +15,12 @@ export class SpotifyAdapter implements IStreaming {
     const clientId = process.env.SPOTIFY_CLIENT_ID;
     const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
 
+    if (!clientId || !clientSecret) {
+      throw new Error(
+        'Missing Spotify credentials: SPOTIFY_CLIENT_ID or SPOTIFY_CLIENT_SECRET not set',
+      );
+    }
+
     try {
       const response: AccessTokensResponseDTO = await axios.post(
         'https://accounts.spotify.com/api/token',
